@@ -1,0 +1,138 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="reddit_data/jquery.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $.getJSON("https://ssl.reddit.com/api/info.json?url=https%3A%2F%2Fwww.massdrop.com%2Fext%2Fergodox%2F&jsonp=?", function (data) {
+          var votes = 0, links = data.data.children.filter(function (elem) {
+            return elem.kind == "t3";
+          });
+          links = $.map(links,function (elem) {
+            votes += elem.data.score;
+            return {
+              score:elem.data.score,
+              permalink:"http://www.reddit.com" + elem.data.permalink
+            }
+          }).sort(function (a, b) {
+              return b.score - a.score;
+            });
+          if (links.length > 0) $(".upvote").text(votes).css("color", "black");
+          $(".reddit-iframe", window.parent.document).width($("table").width());
+        });
+      });
+    </script>
+    <style type="text/css">
+      .pluginCountButton {
+        background: #fff;
+        border: 1px solid #c1c1c1;
+        height: 14px;
+        line-height: 14px;
+        margin-left: 6px;
+        min-width: 15px;
+        padding: 1px 2px;
+        text-align: center;
+        white-space: nowrap;
+        top: 1px;
+        position: relative
+      }
+
+      .pluginCountButtonNub {
+        height: 0;
+        left: 2px;
+        position: relative;
+        top: -13px;
+        width: 5px;
+        z-index: 2
+      }
+
+      .pluginCountButtonNub s, .pluginCountButtonNub i {
+        border-color: transparent #D7D7D7 transparent;
+        border-style: solid;
+        border-width: 4px 5px 4px 0;
+        display: block;
+        position: relative;
+        top: 1px
+      }
+
+      .pluginCountButtonNub i {
+        border-right-color: #fff;
+        left: 2px;
+        top: -7px
+      }
+
+      body.plugin {
+        background: transparent;
+        overflow: hidden
+      }
+
+      body {
+        background: #fff;
+        color: #333;
+        line-height: 1.28;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        direction: ltr;
+        unicode-bidi: embed
+      }
+
+      body, button, input, label, select, td, textarea {
+        font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+        font-size: 11px
+      }
+
+      .redditthis {
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        border: 1px solid #D7D7D7;
+        background: #fff;
+        color: #000;
+        padding: 2px 2px 3px 21px;
+        text-decoration: none;
+        line-height: 14px;
+        position: relative;
+        top: 1px;
+        background-image: url(https://massdropinc.s3.amazonaws.com/img/reddit_icon.png);
+        background-repeat: no-repeat;
+        -webkit-background-size: 18px 18px;
+        background-size: 18px 18px
+      }
+
+      .redditthis:hover {
+        border: 1px solid #aaa
+      }
+
+      .redditthis img {
+        margin-right: 5px
+      }
+
+      .upvote {
+        text-decoration: none;
+        color: #369;
+        padding: 0 2px
+      }
+    </style>
+  </head>
+  <body class="plugin">
+    <table cellspacing="0" cellpadding="0">
+      <tbody><tr>
+        <td>
+          <a href="http://www.reddit.com/submit?url=https%3A%2F%2Fwww.massdrop.com%2Fext%2Fergodox%2F&amp;title=Key+configuration+tool+for+the+ErgoDox+community-designed+keyboard" target="_blank" class="redditthis">reddit</a>
+        </td>
+        <td>
+          <div>
+            <div class="pluginCountButton pluginCountNum">
+              <span id="u_0_3">
+                <span>
+                  <a class="upvote" href="http://www.reddit.com/submit?url=https%3A%2F%2Fwww.massdrop.com%2Fext%2Fergodox%2F&amp;title=Key+configuration+tool+for+the+ErgoDox+community-designed+keyboard" target="_blank">submit</a>
+                </span>
+              </span>
+            </div>
+            <div class="pluginCountButtonNub"><s></s><i></i></div>
+          </div>
+        </td>
+      </tr>
+    </tbody></table>
+  
+</body></html>
